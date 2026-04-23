@@ -6,9 +6,10 @@
 <title>Fix It Guam — Your Island Handyman</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   body {
     font-family: 'Segoe UI', sans-serif;
-    background: #0a1628;
+    background-color: #0a1628;
     color: #fff;
     min-height: 100vh;
     display: flex;
@@ -16,27 +17,46 @@
     align-items: center;
     justify-content: center;
     padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    overflow-x: hidden;
   }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cg opacity='0.07' fill='%2322c55e'%3E%3Cellipse cx='60' cy='20' rx='8' ry='60' transform='rotate(-30 60 20)'/%3E%3Cellipse cx='80' cy='10' rx='7' ry='55' transform='rotate(-10 80 10)'/%3E%3Cellipse cx='40' cy='15' rx='7' ry='55' transform='rotate(-50 40 15)'/%3E%3Cellipse cx='100' cy='30' rx='6' ry='50' transform='rotate(10 100 30)'/%3E%3Cellipse cx='20' cy='30' rx='6' ry='50' transform='rotate(-70 20 30)'/%3E%3Cellipse cx='310' cy='220' rx='8' ry='60' transform='rotate(150 310 220)'/%3E%3Cellipse cx='330' cy='210' rx='7' ry='55' transform='rotate(170 330 210)'/%3E%3Cellipse cx='290' cy='215' rx='7' ry='55' transform='rotate(130 290 215)'/%3E%3Cellipse cx='350' cy='230' rx='6' ry='50' transform='rotate(190 350 230)'/%3E%3Cellipse cx='270' cy='230' rx='6' ry='50' transform='rotate(110 270 230)'/%3E%3Cellipse cx='160' cy='380' rx='8' ry='60' transform='rotate(-20 160 380)'/%3E%3Cellipse cx='180' cy='370' rx='7' ry='55' transform='rotate(0 180 370)'/%3E%3Cellipse cx='140' cy='375' rx='7' ry='55' transform='rotate(-40 140 375)'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 400px 400px;
+    pointer-events: none;
+  }
+
+  body > * { position: relative; z-index: 1; }
+
   .logo { width: 160px; margin-bottom: 24px; border-radius: 20px; }
   h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: 2px; }
   h1 span { color: #f5a623; }
+
   .tagline {
     color: #8ca0be;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     margin: 8px 0 32px;
   }
+
   .services {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
-    max-width: 380px;
+    max-width: 360px;
     width: 100%;
-    margin-bottom: 36px;
+    margin: 0 auto 36px;
   }
+
   .service {
-    background: #132040;
+    background: rgba(19, 32, 64, 0.85);
     border: 1px solid #1e3a6e;
     border-radius: 12px;
     padding: 14px 16px;
@@ -46,6 +66,7 @@
     gap: 10px;
   }
   .service span { font-size: 1.3rem; }
+
   .cta {
     display: inline-flex;
     align-items: center;
@@ -59,12 +80,41 @@
     text-decoration: none;
     margin-bottom: 24px;
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+    width: 100%;
+    max-width: 360px;
+    justify-content: center;
   }
-  .cta:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(37,211,102,0.45); }
-  .cta svg { width: 24px; height: 24px; fill: white; }
-  .footer { color: #4a6080; font-size: 0.8rem; margin-top: 8px; }
-  .by { color: #4a6080; font-size: 0.85rem; margin-top: 20px; }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+  .cta svg { width: 24px; height: 24px; fill: white; flex-shrink: 0; }
+
+  .reviews {
+    max-width: 360px;
+    width: 100%;
+    margin: 36px auto 8px;
+    text-align: left;
+  }
+  .reviews-title {
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8ca0be;
+    margin-bottom: 16px;
+  }
+  .review-card {
+    background: rgba(19, 32, 64, 0.85);
+    border: 1px solid #1e3a6e;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .review-stars { color: #f5a623; font-size: 1rem; margin-bottom: 6px; }
+  .review-text { font-size: 0.9rem; color: #c8d8f0; line-height: 1.5; margin-bottom: 10px; }
+  .review-author { font-size: 0.8rem; color: #4a6080; }
+
+  .footer { color: #4a6080; font-size: 0.8rem; margin-top: 16px; }
+  .by { color: #4a6080; font-size: 0.85rem; margin-top: 12px; margin-bottom: 8px; }
   .by a { color: #6b8cba; text-decoration: none; }
 </style>
 </head>
@@ -89,6 +139,25 @@
     </svg>
     Chat on WhatsApp
   </a>
+
+  <div class="reviews">
+    <p class="reviews-title">⭐ What people say</p>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Fast, clean, and professional. Fixed our leaking pipe same day. Highly recommend!"</p>
+      <p class="review-author">— Maria T., Tamuning</p>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Easy to book through WhatsApp. Showed up on time and did a great job with our AC."</p>
+      <p class="review-author">— James R., Dededo</p>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Honest pricing, no surprises. Will definitely use again for future repairs."</p>
+      <p class="review-author">— Sandra L., Mangilao</p>
+    </div>
+  </div>
 
   <p class="footer">Fast response · Honest pricing · Reliable service</p>
   <p class="by">by <a href="https://www.instagram.com/konstantinthecarpenter">Konstantin The Carpenter</a></p>
